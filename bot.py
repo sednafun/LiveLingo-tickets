@@ -9,7 +9,7 @@ import io
 import pytesseract
 import os
 
-# Токен бота
+# Токен бота (из переменных окружения)
 TOKEN = os.environ.get('BOT_TOKEN')
 
 bot = telebot.TeleBot(TOKEN)
@@ -290,18 +290,19 @@ def search_tickets_by_code(search_term):
 # === ФУНКЦИИ РАСПОЗНАВАНИЯ БИЛЕТА ===
 
 def extract_last_code_from_text(text):
+    """Берёт ПОСЛЕДНЮЮ группу цифр из распознанного текста"""
     all_numbers = re.findall(r'\d+', text)
     print(f"Все найденные коды: {all_numbers}")
-
+    
     if not all_numbers:
         return None
-
+    
+    # Берём ПОСЛЕДНИЙ код
     last_code = all_numbers[-1]
-    if len(last_code) < 8 and len(all_numbers) >= 2:
-        last_code = all_numbers[-2]
-
+    
     print(f"Беру последний код: {last_code}")
-
+    
+    # Проверяем длину (8-15 цифр)
     if 8 <= len(last_code) <= 15:
         return last_code
     return None
