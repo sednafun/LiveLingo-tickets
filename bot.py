@@ -10,7 +10,7 @@ import pytesseract
 import os
 
 # Токен бота
-TOKEN = os.environ.get('8654544789:AAGwGCFwzj1Ehm7fylN4gR75IqIAse-Ukec')
+TOKEN = os.environ.get('BOT_TOKEN')
 
 bot = telebot.TeleBot(TOKEN)
 
